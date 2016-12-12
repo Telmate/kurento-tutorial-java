@@ -67,7 +67,7 @@ public class PlayerHandler extends TextWebSocketHandler {
   public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
     JsonObject jsonMessage = gson.fromJson(message.getPayload(), JsonObject.class);
     String sessionId = session.getId();
-    log.debug("Incoming message {} from sessionId", jsonMessage, sessionId);
+    log.info("Incoming Message {} --- From Session-ID {}", jsonMessage, sessionId);
 
     try {
       switch (jsonMessage.get("id").getAsString()) {
@@ -103,90 +103,116 @@ public class PlayerHandler extends TextWebSocketHandler {
   }
 
   private void start(final WebSocketSession session, JsonObject jsonMessage) {
-    // 1. Media pipeline
-    final UserSession user = new UserSession();
-    MediaPipeline pipeline = kurento.createMediaPipeline();
-    user.setMediaPipeline(pipeline);
-    WebRtcEndpoint webRtcEndpoint = new WebRtcEndpoint.Builder(pipeline).build();
-    user.setWebRtcEndpoint(webRtcEndpoint);
-    String videourl = jsonMessage.get("videourl").getAsString();
-    final PlayerEndpoint playerEndpoint = new PlayerEndpoint.Builder(pipeline, videourl).build();
-    user.setPlayerEndpoint(playerEndpoint);
-    users.put(session.getId(), user);
+      String videourl = jsonMessage.get("videourl").getAsString();
+      log.info("Video-URL is {} --- Session-ID is {}", videourl, session.getId());
 
-    playerEndpoint.connect(webRtcEndpoint);
+      // create the Media pipeline --- no video source or sink yet, but initial state is PLAYING
+      MediaPipeline pipeline = kurento.createMediaPipeline();
 
-    // 2. WebRtcEndpoint
-    // ICE candidates
-    webRtcEndpoint.addIceCandidateFoundListener(new EventListener<IceCandidateFoundEvent>() {
+      // add to pipeline two Media Elements (WebRtcEndpoint, PlayerEndpoint)
+      WebRtcEndpoint webRtcEndpoint = new WebRtcEndpoint.Builder(pipeline).build();
+      final PlayerEndpoint playerEndpoint = new PlayerEndpoint.Builder(pipeline, videourl).build();
 
-      @Override
-      public void onEvent(IceCandidateFoundEvent event) {
-        JsonObject response = new JsonObject();
-        response.addProperty("id", "iceCandidate");
-        response.add("candidate", JsonUtils.toJsonObject(event.getCandidate()));
-        try {
-          synchronized (session) {
-            session.sendMessage(new TextMessage(response.toString()));
-          }
-        } catch (IOException e) {
-          log.debug(e.getMessage());
-        }
-      }
-    });
+      // Create and Update User Session
+      final UserSession user = new UserSession();
+      user.setMediaPipeline(pipeline);
+      user.setWebRtcEndpoint(webRtcEndpoint);
+      user.setPlayerEndpoint(playerEndpoint);
+      users.put(session.getId(), user);
 
-    String sdpOffer = jsonMessage.get("sdpOffer").getAsString();
-    String sdpAnswer = webRtcEndpoint.processOffer(sdpOffer);
+      // 2. WebRtcEndpoint
+      // ICE candidates
+      webRtcEndpoint.addIceCandidateFoundListener(new EventListener<IceCandidateFoundEvent>() {
 
-    JsonObject response = new JsonObject();
-    response.addProperty("id", "startResponse");
-    response.addProperty("sdpAnswer", sdpAnswer);
-    sendMessage(session, response.toString());
-
-    webRtcEndpoint.addMediaStateChangedListener(new EventListener<MediaStateChangedEvent>() {
-      @Override
-      public void onEvent(MediaStateChangedEvent event) {
-
-        if (event.getNewState() == MediaState.CONNECTED) {
-          VideoInfo videoInfo = playerEndpoint.getVideoInfo();
-
+        @Override
+        public void onEvent(IceCandidateFoundEvent event) {
           JsonObject response = new JsonObject();
-          response.addProperty("id", "videoInfo");
-          response.addProperty("isSeekable", videoInfo.getIsSeekable());
-          response.addProperty("initSeekable", videoInfo.getSeekableInit());
-          response.addProperty("endSeekable", videoInfo.getSeekableEnd());
-          response.addProperty("videoDuration", videoInfo.getDuration());
-          sendMessage(session, response.toString());
+          response.addProperty("id", "iceCandidate");
+          response.add("candidate", JsonUtils.toJsonObject(event.getCandidate()));
+          try {
+            synchronized (session) {
+              session.sendMessage(new TextMessage(response.toString()));
+            }
+          } catch (IOException e) {
+            log.debug(e.getMessage());
+          }
         }
+      });
+
+      String sdpOffer = jsonMessage.get("sdpOffer").getAsString();
+      String sdpAnswer = webRtcEndpoint.processOffer(sdpOffer);
+
+      JsonObject response = new JsonObject();
+      response.addProperty("id", "startResponse");
+      response.addProperty("sdpAnswer", sdpAnswer);
+      sendMessage(session, response.toString());
+
+      webRtcEndpoint.addMediaStateChangedListener(new EventListener<MediaStateChangedEvent>() {
+        @Override
+        public void onEvent(MediaStateChangedEvent event) {
+
+          if (event.getNewState() == MediaState.CONNECTED) {
+            VideoInfo videoInfo = playerEndpoint.getVideoInfo();
+
+            JsonObject response = new JsonObject();
+            response.addProperty("id", "videoInfo");
+            response.addProperty("isSeekable", videoInfo.getIsSeekable());
+            response.addProperty("initSeekable", videoInfo.getSeekableInit());
+            response.addProperty("endSeekable", videoInfo.getSeekableEnd());
+            response.addProperty("videoDuration", videoInfo.getDuration());
+            sendMessage(session, response.toString());
+          }
+        }
+      });
+
+      webRtcEndpoint.gatherCandidates();
+
+      // 3. PlayEndpoint
+      playerEndpoint.addErrorListener(new EventListener<ErrorEvent>() {
+        @Override
+        public void onEvent(ErrorEvent event) {
+          log.info("ErrorEvent: {}", event.getDescription());
+          sendPlayEnd(session);
+        }
+      });
+
+      playerEndpoint.addEndOfStreamListener(new EventListener<EndOfStreamEvent>() {
+        @Override
+        public void onEvent(EndOfStreamEvent event) {
+          log.info("EndOfStreamEvent: {}", event.getTimestamp());
+          sendPlayEnd(session);
+        }
+      });
+      
+      FrameSaverPluginProxy frame_saver_proxy = FrameSaverPluginProxy.newInstance(pipeline);
+      
+      boolean is_frame_saver_debug = FrameSaverPluginProxy.IS_DEBUG();  
+
+      boolean is_frame_saver_valid = is_frame_saver_debug || frame_saver_proxy.setParams(null);
+
+      if (is_frame_saver_valid)
+      {
+          is_frame_saver_valid = frame_saver_proxy.connectWith(playerEndpoint, webRtcEndpoint);
       }
-    });
-
-    webRtcEndpoint.gatherCandidates();
-
-    // 3. PlayEndpoint
-    playerEndpoint.addErrorListener(new EventListener<ErrorEvent>() {
-      @Override
-      public void onEvent(ErrorEvent event) {
-        log.info("ErrorEvent: {}", event.getDescription());
-        sendPlayEnd(session);
+      
+      if (! is_frame_saver_valid)
+      {
+          playerEndpoint.connect(webRtcEndpoint);     // original one-way direct-connection         
       }
-    });
 
-    playerEndpoint.addEndOfStreamListener(new EventListener<EndOfStreamEvent>() {
-      @Override
-      public void onEvent(EndOfStreamEvent event) {
-        log.info("EndOfStreamEvent: {}", event.getTimestamp());
-        sendPlayEnd(session);
-      }
-    });
-
-    playerEndpoint.play();
+      //log.info("PipelineTopology CONNECTED \r\n {} \r\n -------------------- \r\n", pipeline.getGstreamerDot());          
+      
+      playerEndpoint.play();
   }
 
   private void pause(String sessionId) {
     UserSession user = users.get(sessionId);
 
+    //? log.info("PipelineTopology B4PAUSE \r\n {} \r\n -------------------- \r\n", user.getMediaPipeline().getGstreamerDot());          
+
     if (user != null) {
+        //log.info("PipelineTopology DURING PLAY: \r\n {} \r\n -------------------- \r\n", user.getMediaPipeline().getGstreamerDot());      
+        
       user.getPlayerEndpoint().pause();
     }
   }
@@ -209,7 +235,7 @@ public class PlayerHandler extends TextWebSocketHandler {
   }
 
   private void stop(String sessionId) {
-    UserSession user = users.remove(sessionId);
+      UserSession user = users.remove(sessionId);
 
     if (user != null) {
       user.release();
