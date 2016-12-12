@@ -1,0 +1,170 @@
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ ls -al
+total 68
+drwxr-xr-x  6 jonny jonny  4096 Dec 11 04:00 .
+drwxr-xr-x 25 jonny jonny  4096 Dec 12 09:51 ..
+-rw-r--r--  1 jonny jonny    46 Nov 29 15:40 .bowerrc
+-rw-r--r--  1 jonny jonny  1093 Dec 11 03:56 .classpath
+-rw-r--r--  1 jonny jonny     9 Nov 29 15:40 .gitignore
+-rw-r--r--  1 jonny jonny 11357 Nov 29 15:40 LICENSE
+drwxr-xr-x  4 jonny jonny  4096 Nov 29 15:40 package
+-rw-r--r--  1 jonny jonny  4634 Nov 30 08:31 pom.xml
+-rw-r--r--  1 jonny jonny   567 Dec  6 16:21 .project
+-rw-r--r--  1 jonny jonny  5154 Nov 29 15:40 README.md
+drwxr-xr-x  2 jonny jonny  4096 Dec  5 23:34 .settings
+drwxr-xr-x  5 jonny jonny  4096 Dec 11 03:43 src
+drwxr-xr-x  6 jonny jonny  4096 Dec  5 23:34 target
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ ls -alR src/main/java/org/kurento/module/pointerdetectix/
+src/main/java/org/kurento/module/pointerdetectix/:
+total 40
+drwxr-xr-x 2 jonny jonny 4096 Dec 12 11:39 .
+drwxr-xr-x 6 jonny jonny 4096 Dec 12 11:39 ..
+-rw-r--r-- 1 jonny jonny 8219 Dec 12 11:33 PointerDetectixFilter.java
+-rw-r--r-- 1 jonny jonny 4481 Dec 12 11:33 PointerDetectixWindowMediaParam.java
+-rw-r--r-- 1 jonny jonny 1649 Dec 12 11:33 WindowInEvent.java
+-rw-r--r-- 1 jonny jonny 1649 Dec 12 11:33 WindowOutEvent.java
+-rw-r--r-- 1 jonny jonny 2643 Dec 12 11:33 WindowParam.java
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ ls -alR src/main/java/org/kurento/tutorial/player/
+src/main/java/org/kurento/tutorial/player/:
+total 40
+drwxr-xr-x 2 jonny jonny  4096 Dec  6 16:31 .
+drwxr-xr-x 3 jonny jonny  4096 Nov 29 15:40 ..
+-rw-r--r-- 1 jonny jonny  9519 Dec 12 07:42 FrameSaverPluginProxy.java
+-rw-r--r-- 1 jonny jonny  1740 Nov 29 15:40 PlayerApp.java
+-rw-r--r-- 1 jonny jonny 11290 Dec  9 18:18 PlayerHandler.java
+-rw-r--r-- 1 jonny jonny  1768 Nov 29 15:40 UserSession.java
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ mvn compile
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Kurento Java Tutorial - Player 6.6.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-java-version) @ kurento-player ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-maven-version) @ kurento-player ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-bytecode-version) @ kurento-player ---
+[INFO] 
+[INFO] --- buildnumber-maven-plugin:1.4:create-timestamp (get-build-timestamp) @ kurento-player ---
+[INFO] 
+[INFO] --- buildnumber-maven-plugin:1.4:create (get-scm-revision) @ kurento-player ---
+[INFO] Executing: /bin/sh -c cd '/home/jonny/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver' && 'git' 'rev-parse' '--verify' 'HEAD'
+[INFO] Working directory: /home/jonny/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver
+[INFO] Storing buildNumber: 46b428871d0f26378f3b2592fab70a6723dfaac4 at timestamp: 1481572763066
+[WARNING] Cannot get the branch information from the git repository: 
+Detecting the current branch failed: fatal: ref HEAD is not a symbolic ref
+
+[INFO] Executing: /bin/sh -c cd '/home/jonny/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver' && 'git' 'rev-parse' '--verify' 'HEAD'
+[INFO] Working directory: /home/jonny/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver
+[INFO] Storing buildScmBranch: UNKNOWN
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ kurento-player ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 13 resources
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.3:compile (default-compile) @ kurento-player ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.107s
+[INFO] Finished at: Mon Dec 12 11:59:23 PST 2016
+[INFO] Final Memory: 22M/434M
+[INFO] ------------------------------------------------------------------------
+
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ mvn exec:java
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Kurento Java Tutorial - Player 6.6.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ kurento-player ---
+
+   .------------------------------------.
+   |                                    |
+   |   | |/ /  _ _ _ ___ _ _| |_ ___    |
+   |   | ' < || | '_/ -_) ' \  _/ _ \   |
+   |   |_|\_\_,_|_| \___|_||_\__\___/   |
+   |                                    |
+   '------------------------------------'
+       Kurento Java Tutorial - Player
+       Version 6.6.0
+
+2016-12-12 12:20:42.473  INFO 7778 --- [layerApp.main()] org.kurento.tutorial.player.PlayerApp    : Starting PlayerApp on XPS-15-JB1-LNX17 with PID 7778 (/home/jonny/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver/target/classes started by jonny in /home/jonny/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver)
+2016-12-12 12:20:42.477  INFO 7778 --- [layerApp.main()] org.kurento.tutorial.player.PlayerApp    : No active profile set, falling back to default profiles: default
+2016-12-12 12:20:42.519  INFO 7778 --- [layerApp.main()] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@14d9ff63: startup date [Mon Dec 12 12:20:42 PST 2016]; root of context hierarchy
+2016-12-12 12:20:43.218  INFO 7778 --- [layerApp.main()] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-12-12 12:20:43.505  INFO 7778 --- [layerApp.main()] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8443 (https)
+2016-12-12 12:20:43.515  INFO 7778 --- [layerApp.main()] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2016-12-12 12:20:43.515  INFO 7778 --- [layerApp.main()] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.28
+2016-12-12 12:20:43.586  INFO 7778 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2016-12-12 12:20:43.587  INFO 7778 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1071 ms
+2016-12-12 12:20:43.821  INFO 7778 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2016-12-12 12:20:43.825  INFO 7778 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-12-12 12:20:43.825  INFO 7778 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2016-12-12 12:20:43.825  INFO 7778 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2016-12-12 12:20:43.825  INFO 7778 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' to: [/*]
+2016-12-12 12:20:43.872  INFO 7778 --- [layerApp.main()] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService  'defaultSockJsTaskScheduler'
+2016-12-12 12:20:43.919  INFO 7778 --- [layerApp.main()] org.eclipse.jetty.util.log               : Logging initialized @3500ms
+2016-12-12 12:20:44.124  INFO 7778 --- [ntLoopGroup-2-1] o.k.j.c.JsonRpcClientNettyWebSocket      : [KurentoClient]  Inititating new Netty channel. Will create new handler too!
+2016-12-12 12:20:44.216  INFO 7778 --- [layerApp.main()] o.s.w.s.s.s.WebSocketHandlerMapping      : Mapped URL path [/player] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler]
+2016-12-12 12:20:44.313  INFO 7778 --- [layerApp.main()] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@14d9ff63: startup date [Mon Dec 12 12:20:42 PST 2016]; root of context hierarchy
+2016-12-12 12:20:44.354  INFO 7778 --- [layerApp.main()] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-12-12 12:20:44.355  INFO 7778 --- [layerApp.main()] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2016-12-12 12:20:44.357  INFO 7778 --- [layerApp.main()] o.s.w.s.c.a.WebMvcConfigurerAdapter      : Adding welcome page: class path resource [static/index.html]
+2016-12-12 12:20:44.362  INFO 7778 --- [layerApp.main()] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2016-12-12 12:20:44.424  INFO 7778 --- [layerApp.main()] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-12-12 12:20:44.425  INFO 7778 --- [layerApp.main()] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-12-12 12:20:44.447  INFO 7778 --- [layerApp.main()] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-12-12 12:20:44.514  INFO 7778 --- [layerApp.main()] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2016-12-12 12:20:44.519  INFO 7778 --- [layerApp.main()] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2016-12-12 12:20:44.666  INFO 7778 --- [layerApp.main()] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8443 (https)
+2016-12-12 12:20:44.669  INFO 7778 --- [layerApp.main()] org.kurento.tutorial.player.PlayerApp    : Started PlayerApp in 2.387 seconds (JVM running for 4.251)
+2016-12-12 12:20:57.436  INFO 7778 --- [nio-8443-exec-7] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2016-12-12 12:20:57.436  INFO 7778 --- [nio-8443-exec-7] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2016-12-12 12:20:57.444  INFO 7778 --- [nio-8443-exec-7] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 8 ms
+2016-12-12 12:20:59.524  INFO 7778 --- [nio-8443-exec-8] o.kurento.tutorial.player.PlayerHandler  : Incoming Message {"id":"start","sdpOffer":"v=0\r\no=mozilla...THIS_IS_SDPARTA-50.0.2 2551303634153104952 0 IN IP4 0.0.0.0\r\ns=-\r\nt=0 0\r\na=sendrecv\r\na=fingerprint:sha-256 A4:ED:DC:AE:87:B2:79:D4:F0:55:57:97:48:62:7F:BE:A4:7B:04:62:F1:DB:86:6F:98:54:19:DF:31:A7:19:84\r\na=group:BUNDLE sdparta_0 sdparta_1\r\na=ice-options:trickle\r\na=msid-semantic:WMS *\r\nm=audio 9 UDP/TLS/RTP/SAVPF 109 9 0 8\r\nc=IN IP4 0.0.0.0\r\na=recvonly\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=fmtp:109 maxplaybackrate=48000;stereo=1;useinbandfec=1\r\na=ice-pwd:f5446ddb7af88e0ce282b1c20f512fbd\r\na=ice-ufrag:80769677\r\na=mid:sdparta_0\r\na=rtcp-mux\r\na=rtpmap:109 opus/48000/2\r\na=rtpmap:9 G722/8000/1\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=setup:actpass\r\na=ssrc:139922577 cname:{073801fc-b0be-4db1-901d-efcf7da12949}\r\nm=video 9 UDP/TLS/RTP/SAVPF 120 126 97\r\nc=IN IP4 0.0.0.0\r\na=recvonly\r\na=fmtp:120 max-fs=12288;max-fr=60\r\na=fmtp:126 profile-level-id=42e01f;level-asymmetry-allowed=1;packetization-mode=1\r\na=fmtp:97 profile-level-id=42e01f;level-asymmetry-allowed=1\r\na=ice-pwd:f5446ddb7af88e0ce282b1c20f512fbd\r\na=ice-ufrag:80769677\r\na=mid:sdparta_1\r\na=rtcp-fb:120 nack\r\na=rtcp-fb:120 nack pli\r\na=rtcp-fb:120 ccm fir\r\na=rtcp-fb:120 goog-remb\r\na=rtcp-fb:126 nack\r\na=rtcp-fb:126 nack pli\r\na=rtcp-fb:126 ccm fir\r\na=rtcp-fb:126 goog-remb\r\na=rtcp-fb:97 nack\r\na=rtcp-fb:97 nack pli\r\na=rtcp-fb:97 ccm fir\r\na=rtcp-fb:97 goog-remb\r\na=rtcp-mux\r\na=rtpmap:120 VP8/90000\r\na=rtpmap:126 H264/90000\r\na=rtpmap:97 H264/90000\r\na=setup:actpass\r\na=ssrc:2138863700 cname:{073801fc-b0be-4db1-901d-efcf7da12949}\r\n","videourl":"https://upload.wikimedia.org/wikipedia/commons/2/25/Sintel_webm_extract.webm"} --- From Session-ID 0
+2016-12-12 12:20:59.524  INFO 7778 --- [nio-8443-exec-8] o.kurento.tutorial.player.PlayerHandler  : Video-URL is https://upload.wikimedia.org/wikipedia/commons/2/25/Sintel_webm_extract.webm --- Session-ID is 0
+2016-12-12 12:20:59.694  INFO 7778 --- [nio-8443-exec-8] o.k.t.player.FrameSaverPluginProxy       : ThePointerDetectix:    WAS CREATED
+2016-12-12 12:20:59.699  INFO 7778 --- [nio-8443-exec-8] o.k.t.player.FrameSaverPluginProxy       : CONNECTED:   aFromElement-->--ThePointerDetectix-->--aIntoElement
+2016-12-12 12:20:59.703  INFO 7778 --- [nio-8443-exec-8] o.kurento.tutorial.player.PlayerHandler  : Incoming Message {"id":"onIceCandidate","candidate":{"candidate":"candidate:0 1 UDP 2122252543 192.168.0.2 52020 typ host","sdpMid":"sdparta_0","sdpMLineIndex":0}} --- From Session-ID 0
+2016-12-12 12:20:59.708  INFO 7778 --- [nio-8443-exec-8] o.kurento.tutorial.player.PlayerHandler  : Incoming Message {"id":"onIceCandidate","candidate":{"candidate":"candidate:0 2 UDP 2122252542 192.168.0.2 35513 typ host","sdpMid":"sdparta_0","sdpMLineIndex":0}} --- From Session-ID 0
+2016-12-12 12:20:59.711  INFO 7778 --- [nio-8443-exec-8] o.kurento.tutorial.player.PlayerHandler  : Incoming Message {"id":"onIceCandidate","candidate":{"candidate":"candidate:0 1 UDP 2122252543 192.168.0.2 58229 typ host","sdpMid":"sdparta_1","sdpMLineIndex":1}} --- From Session-ID 0
+2016-12-12 12:20:59.714  INFO 7778 --- [nio-8443-exec-8] o.kurento.tutorial.player.PlayerHandler  : Incoming Message {"id":"onIceCandidate","candidate":{"candidate":"candidate:0 2 UDP 2122252542 192.168.0.2 32870 typ host","sdpMid":"sdparta_1","sdpMLineIndex":1}} --- From Session-ID 0
+2016-12-12 12:20:59.730  INFO 7778 --- [io-8443-exec-10] o.kurento.tutorial.player.PlayerHandler  : Incoming Message {"id":"onIceCandidate","candidate":{"candidate":"candidate:2 1 UDP 1686052607 76.167.144.126 52020 typ srflx raddr 192.168.0.2 rport 52020","sdpMid":"sdparta_0","sdpMLineIndex":0}} --- From Session-ID 0
+2016-12-12 12:20:59.743  INFO 7778 --- [nio-8443-exec-5] o.kurento.tutorial.player.PlayerHandler  : Incoming Message {"id":"onIceCandidate","candidate":{"candidate":"candidate:2 2 UDP 1686052606 76.167.144.126 35513 typ srflx raddr 192.168.0.2 rport 35513","sdpMid":"sdparta_0","sdpMLineIndex":0}} --- From Session-ID 0
+2016-12-12 12:21:08.412  INFO 7778 --- [nio-8443-exec-3] o.kurento.tutorial.player.PlayerHandler  : Incoming Message {"id":"stop"} --- From Session-ID 0
+^C2016-12-12 12:21:15.758  INFO 7778 --- [       Thread-2] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@14d9ff63: startup date [Mon Dec 12 12:20:42 PST 2016]; root of context hierarchy
+2016-12-12 12:21:15.761  INFO 7778 --- [       Thread-2] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2016-12-12 12:21:15.763  INFO 7778 --- [       Thread-2] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2016-12-12 12:21:15.773  INFO 7778 --- [ntLoopGroup-2-1] o.k.j.c.JsonRpcClientNettyWebSocket      : [KurentoClient]  channel closed
+2016-12-12 12:21:15.786  INFO 7778 --- [       Thread-2] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'defaultSockJsTaskScheduler'
+jonny@XPS-15-JB1-LNX17 ~/Work/TELMATE/kurento-tutorial-java/APP-kurento-player-with-kms-framesaver $ 
+
+
+############### /var/log/kurento-media-server/media-server_error.log
+
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+pointerdetectix --- kms_pointer_detectix_transform_frame_ip --- wdt=640  hgt=360 
+
+
+
